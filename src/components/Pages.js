@@ -41,11 +41,13 @@ function Pages({
         );
         setPeopleData(response?.data?.result);
         setTotalPages(response?.data?.count);
-      }
-      //else if (searchedText !== "" && selectedValue !== "") {
-      //     //TO DO
-      //   }
-      else {
+      } else if (searchedText !== "" && selectedValue !== "") {
+        const response = await swApi.get(
+          `/fsearch?page=${page}&${selectedCategory}=${selectedValue}&string=${searchedText}`
+        );
+        setPeopleData(response?.data?.result);
+        setTotalPages(response?.data?.count);
+      } else {
         const response = await swApi.get(`/sw?page=${page}`);
         setPeopleData(response.data);
         setTotalPages(88);
