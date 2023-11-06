@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { swApi } from "../api/axiosConfig";
 import { Button, Pagination } from "antd";
 import "../App.css";
@@ -11,7 +11,15 @@ function Pages({
   setError,
   currPage,
   setCurrPage,
+  searchedText,
+  selectedValue,
+  selectedCategory,
 }) {
+  const [totalPages, setTotalPages] = useState(88);
+  useEffect(() => {
+    handlePageChange(currPage);
+    console.log(selectedValue, "  ss  ", searchedText);
+  }, [selectedValue, searchedText]);
   const refreshPage = () => {
     handlePageChange(currPage);
   };
@@ -20,11 +28,29 @@ function Pages({
     setError(null);
     setCurrPage(page);
     try {
-      const response = await swApi.get(`/sw?page=${page}`);
-      console.log(response.data);
-      setPeopleData(response.data);
+      if (searchedText !== "" && selectedValue === "") {
+        const response = await swApi.get(
+          `/search?page=${page}&string=${searchedText}`
+        );
+        setPeopleData(response?.data?.result);
+        setTotalPages(response?.data?.count);
+      } else if (searchedText === "" && selectedValue !== "") {
+        const response = await swApi.get(
+          `/filter?page=${page}&${selectedCategory}=${selectedValue}`
+        );
+        setPeopleData(response?.data?.result);
+        setTotalPages(response?.data?.count);
+      }
+      //else if (searchedText !== "" && selectedValue !== "") {
+      //     //TO DO
+      //   }
+      else {
+        const response = await swApi.get(`/sw?page=${page}`);
+        setPeopleData(response.data);
+        setTotalPages(88);
+      }
     } catch (error) {
-      setError(error?.message);
+      setError(error?.response?.data?.message);
     } finally {
       setLoading(false);
     }
@@ -36,7 +62,8 @@ function Pages({
   return (
     <div className="Pages">
       <Pagination
-        total={88}
+        defaultCurrent={1}
+        total={totalPages}
         showSizeChanger={false}
         onChange={(page) => {
           handlePageChange(page);
