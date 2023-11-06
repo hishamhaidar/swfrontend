@@ -19,6 +19,7 @@ function Pages({
   useEffect(() => {
     handlePageChange(currPage);
     console.log(selectedValue, "  ss  ", searchedText);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedValue, searchedText]);
   const refreshPage = () => {
     handlePageChange(currPage);

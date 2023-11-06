@@ -33,7 +33,7 @@ function Home() {
         selectedValue={selectedValue}
         selectedCategory={selectedCategory}
       />
-      <pre>{JSON.stringify(peopleData, 0, 2)}</pre>
+      {loading && <pre>{JSON.stringify(peopleData, 0, 2)}</pre>}
     </div>
   );
 }
