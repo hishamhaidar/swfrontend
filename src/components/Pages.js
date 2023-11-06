@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { swApi } from "../api/axiosConfig";
+import { swApi } from "../api/AxiosConfig";
 import { Button, Pagination } from "antd";
 import "../App.css";
 import { ReloadOutlined } from "@ant-design/icons";

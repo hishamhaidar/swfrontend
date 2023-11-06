@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Radio, Row, Select, Space, message } from "antd";
-import { swApi } from "../api/axiosConfig";
+import { swApi } from "../api/AxiosConfig";
 
 const { Option } = Select;
 
