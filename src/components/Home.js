@@ -2,6 +2,7 @@ import { Alert, Typography } from "antd";
 import React, { useState } from "react";
 import Pages from "./Pages";
 import SearchFilterBar from "./SearchFilterBar";
+import PersonDetails from "./PersonDetail";
 
 function Home() {
   const [peopleData, setPeopleData] = useState([]);
@@ -11,7 +12,8 @@ function Home() {
   const [searchedText, setSearchedText] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
-
+  
+  
   return (
     <div>
       <Typography.Title id="starwarH1">Star Wars</Typography.Title>
@@ -34,6 +36,13 @@ function Home() {
         selectedCategory={selectedCategory}
       />
       {!loading && <pre>{JSON.stringify(peopleData, 0, 2)}</pre>}
+      <PersonDetails
+        pressedPerson={null}
+        isCardPressed={null}
+        setPressedPerson={null}
+        setIsCardPressed={null}
+      />
+
     </div>
   );
 }
