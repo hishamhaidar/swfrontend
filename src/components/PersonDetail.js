@@ -1,5 +1,5 @@
-import { Button, Modal, message } from "antd";
-import React, { useState } from "react";
+import { Modal } from "antd";
+import React from "react";
 import "../App.css";
 
 function PersonDetails({ pressedPerson, isCardPressed, setIsCardPressed }) {
@@ -17,6 +17,7 @@ function PersonDetails({ pressedPerson, isCardPressed, setIsCardPressed }) {
       {pressedPerson && (
         <>
           <h1>{pressedPerson.name}</h1>
+          <img src={pressedPerson.image} alt={pressedPerson.name} />
           <p>Height: {pressedPerson.height} cm</p>
           <p>Mass: {pressedPerson.mass} kg</p>
           <p>Gender: {pressedPerson.gender}</p>
@@ -30,35 +31,38 @@ function PersonDetails({ pressedPerson, isCardPressed, setIsCardPressed }) {
           <p>Skin Color: {pressedPerson.skinColor}</p>
           <p>Cybernetics: {pressedPerson.cybernetics}</p>
 
-          <p>Affiliations:</p>
-          <ul>
-            {pressedPerson.affiliations.map((affiliation, index) => (
-              <li key={index}>{affiliation}</li>
-            ))}
-          </ul>
-
-          <p>Masters:</p>
-          <ul>
-            {pressedPerson.masters.map((master, index) => (
-              <li key={index}>{master}</li>
-            ))}
-          </ul>
-
-          <p>Apprentices:</p>
-          <ul>
-            {pressedPerson.apprentices.map((apprentice, index) => (
-              <li key={index}>{apprentice}</li>
-            ))}
-          </ul>
-          
-          <p>Former Affiliations:</p>
-          <ul>
-            {pressedPerson.formerAffiliations.map((formerAffiliation, index) => (
-              <li key={index}>{formerAffiliation}</li>
-            ))}
-          </ul>
-          
-          <img src={pressedPerson.image} alt={pressedPerson.name} />
+          {pressedPerson?.affiliations && (
+            <>
+              <p>Affiliations:</p>
+              <ul>
+                {pressedPerson?.affiliations?.map((affiliation, index) => (
+                  <li key={index}>{affiliation}</li>
+                ))}
+              </ul>
+            </>
+          )}
+          {pressedPerson?.apprentices && (
+            <>
+              <p>Apprentices:</p>
+              <ul>
+                {pressedPerson?.apprentices?.map((apprentice, index) => (
+                  <li key={index}>{apprentice}</li>
+                ))}
+              </ul>
+            </>
+          )}
+          {pressedPerson?.formerAffiliations && (
+            <>
+              <p>Former Affiliations:</p>
+              <ul>
+                {pressedPerson?.formerAffiliations?.map(
+                  (formerAffiliation, index) => (
+                    <li key={index}>{formerAffiliation}</li>
+                  )
+                )}
+              </ul>
+            </>
+          )}
         </>
       )}
     </Modal>

@@ -31,7 +31,7 @@ function Pages({
     try {
       if (searchedText !== "" && selectedValue === "") {
         const response = await swApi.get(
-          `/search?page=${page}&string=${searchedText}`
+          `/search?page=${page}&name=${searchedText}`
         );
         setPeopleData(response?.data?.result);
         setTotalPages(response?.data?.count);
@@ -43,7 +43,7 @@ function Pages({
         setTotalPages(response?.data?.count);
       } else if (searchedText !== "" && selectedValue !== "") {
         const response = await swApi.get(
-          `/fsearch?page=${page}&${selectedCategory}=${selectedValue}&string=${searchedText}`
+          `/fsearch?page=${page}&${selectedCategory}=${selectedValue}&name=${searchedText}`
         );
         setPeopleData(response?.data?.result);
         setTotalPages(response?.data?.count);
